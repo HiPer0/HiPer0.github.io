@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="HiPer.">
+  <meta name="keywords" content="HiPer, Stable Diffusion, Personalization, Text embedding">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Highly Personalized Text Embedding for Image Manipulation by Stable Diffusion </title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Highly Personalized Text Embedding for Image Manipulation by Stable Diffusion</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Inhwa Han</a><sup>*</sup>,</span>
+            <span class="author-block">
+              Serin Yang</a><sup>*</sup>,</span>
+            <span class="author-block">
+              Taesung Kwon</a>,</span>
+            <span class="author-block">
+              Jong Chul Ye</a></span>
+          </div>
+          
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><small><sup>*</sup>Equal contribution</small></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Korea Advanced Institute of Science and Technology (KAIST)</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2303.08767"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/HiPer0/HiPer"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+                </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Highly Personalized Text Embedding for Image Manipulation by Stable Diffusion</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Anonymous Authors</a></span>
+          </div>
+          
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><small><sup>*</sup>Under review</small></span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2303.08767"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/HiPer0/HiPer"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+                </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+-->
+
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img id="teaser" autoplay muted loop playsinline height="100%">
+      <img src="./static/images/fig_main.jpg" width="700"
+                 class="image-main"/>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Diffusion models have shown superior performance in image generation and manipulation, 
+            but the inherent stochasticity presents challenges in preserving and manipulating image content 
+            and identity. 
+            While previous approaches like DreamBooth and Textual Inversion have proposed 
+            model or latent representation personalization to maintain the content, 
+            their reliance on multiple reference images and complex training limits their practicality. 
+            In this paper, we present a simple yet highly effective approach to personalization 
+            using highly personalized (HiPer) text embedding by decomposing 
+            the CLIP embedding space for personalization and content manipulation. 
+            Our method does not require model fine-tuning or identifiers, 
+            yet still enables manipulation of background, texture, and motion 
+            with just a single image and target text. 
+            Through experiments on diverse target texts, we demonstrate that our approach produces 
+            highly personalized and complex semantic image edits across a wide range of tasks. 
+            We believe that the novel understanding of the text embedding space presented in this work 
+            has the potential to inspire further research across various tasks.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<!--
+<section class="hero body">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column content">
+        <h2 class="title is-3">Results</h2>
+        <div class="hero-body">
+          <img id="fig4-comparison"
+                src="./static/images/fig_main.jpg"
+                class="fig4-comparison"/>
+        </div>
+        <div class="hero-body">
+          <img id="fig6-doctor">
+          <img src="./static/images/fig_doctor.jpg"
+                    class="fig6-doctor"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+-->
+
+<section class="hero body">
+  <div class="container is-max-desktop">
+    <div class="columns is-four-fifths has-text-centered">
+      <div class="column content">
+        <div class="hero-body">
+          <img id="fig-method"
+                src="./static/images/fig_method_v2.jpg"
+                class="fig-method"/>
+          <h2 class="subtitle has-text-centered">
+            HiPer manipulates a single image using a personalized text embedding and a target text prompt.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+<section class="hero body">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column content">
+        <div class="hero-body">
+          <img id="fig6-doctor">
+          <img src="./static/images/fig_doctor.jpg"
+                    class="fig6-doctor"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>-->
+
+
+<section class="hero is-light is-small">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+        <div class="section-title">
+          <h2 class="title is-3 is-centered">Animal</h2>
+        </div>
+        <div class="columns is-centered has-text-centered">
+          <div class="column">
+            <div class="publication-img">
+              <img id="architecture" src="static/images/fig_animals.jpg" width="700"/>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero body">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column content"><h2 class="title is-3">Human</h2>
+        <div class="hero-body">
+          <img id="fig-human">
+          <img src="./static/images/fig_human.jpg" width="700"
+                    class="fig-human"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<!--
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img poster="" id="result01" centerMode loop height="200%"
+            src="./static/images/result01.jpg">
+        </div>
+        <div class="item">
+          <img poster="" id="result02" centerMode loop height="200%"
+            src="./static/images/result02.jpg">
+        </div>
+        <div class="item">
+          <img poster="" id="result03" centerMode loop height="200%"
+            src="./static/images/result03.jpg">
+        </div>
+        <div class="item">
+          <img poster="" id="result04" centerMode loop height="200%"
+            src="./static/images/result04.jpg">
+        </div>
+        <div class="item">
+          <img poster="" id="result05" centerMode loop height="200%"
+            src="./static/images/result05.jpg">
+        </div>
+        <div class="item">
+          <img poster="" id="result06" centerMode loop height="200%"
+            src="./static/images/result06.jpg">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- 
+<section class="hero body">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column content"><h2 class="title is-3">Personalization</h2>
+        <div class="hero-body">
+          <img id="fig-guitar">
+          <img src="./static/images/fig_guitar.jpg" width=700
+                    class="fig-guitar"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>-->
+
+
+<section class="hero is-light is-small">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+        <div class="section-title">
+          <h2 class="title is-3 is-centered">Personalization</h2>
+        </div>
+        <div class="columns is-centered has-text-centered">
+          <div class="column">
+            <div class="publication-img">
+              <img id="architecture" src="static/images/fig_guitar.jpg" width="700"/>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{han2023highly,
+      title={Highly Personalized Text Embedding for Image Manipulation by Stable Diffusion},
+      author={Han, Inhwa and Yang, Serin and Kwon, Taesung and Ye, Jong Chul},
+      journal={arXiv preprint arXiv:2303.08767},
+      year={2023}
+}</code></pre>
+  </div>
+</section>
+<!--
+<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fhiper0.github.io&count_bg=%23C2C2C2&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
+-->
+
+<div class="container">
+  <div class="content has-text-centered">
+    <div class="list-group">
+        <a class="lis-group-item" href="https://hits.seeyoufarm.com">
+          <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fhiper0.github.io&count_bg=%23C2C2C2&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/>
+        </a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
