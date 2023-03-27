@@ -213,22 +213,46 @@
 </section>
 -->
 
-<section class="hero body">
+<section class="hero teaser">
   <div class="container is-max-desktop">
-    <div class="columns is-four-fifths has-text-centered">
-      <div class="column content">
-        <div class="hero-body">
-          <img id="fig-method"
-                src="./static/images/fig_method_v2.jpg"
-                class="fig-method"/>
-          <h2 class="subtitle has-text-centered">
-            HiPer manipulates a single image using a personalized text embedding and a target text prompt.
-          </h2>
-        </div>
+    <div class="hero-body">
+      <div class="hero-body">
+        <img id="fig-method"
+              src="./static/images/fig_method_v2.jpg"
+              class="fig-method"/>
+        <h2 class="subtitle has-text-centered">
+          HiPer manipulates a single image using a personalized text embedding and a target text prompt. 
+          After training the personalized embedding, it is replaced with the tail of the target embedding during the inference phase.
+          Our method requires a single images for 3-minute training, and target text prompt for inference. 
+        </h2>
       </div>
     </div>
   </div>
 </section>
+
+
+<section class="hero is-light is-small">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+        <div class="section-title">
+          <h2 class="title is-3 is-centered">Personalization</h2>
+        </div>
+        <h2 class="subtitle has-text-centered">
+          Personalization requires manipulating images with diverse prompts while still maintaining the subject's identity.
+          Stable Diffusion does not incorporate information on the guitar, resulting in variations in the shapes of guitars across different samples. 
+          On the other hand, HiPer is capable of preserving the guitar's identity across various target prompts.
+        </h2>
+        <div class="columns is-centered has-text-centered">
+          <div class="column">
+            <div class="publication-img">
+              <img id="architecture" src="static/images/fig_guitar.jpg" width="700"/>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
 
 <!--
 <section class="hero body">
@@ -246,40 +270,48 @@
 </section>-->
 
 
+
+
+
+<section class="hero body">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+        <div class="section-title">
+          <h2 class="title is-3 is-centered">More results with animal</h2>
+        </div>
+        <h2 class="subtitle has-text-centered">
+          The identities of the animals are effectively maintained during modulation.
+        </h2>
+        <div class="hero-body">
+          <img id="fig-human">
+          <img src="./static/images/fig_animals.jpg" width="700"
+                    class="fig-human"/>
+        </div>
+    </div>
+  </div>
+</section>
+
+
 <section class="hero is-light is-small">
   <div class="container is-max-desktop">
     <div class="hero-body">
         <div class="section-title">
-          <h2 class="title is-3 is-centered">Animal</h2>
+          <h2 class="title is-3 is-centered">More results with human</h2>
         </div>
+        <h2 class="subtitle has-text-centered">
+          HiPer shows great performance on human face images as well as animal images. 
+          Modifications in emotions, wearings, and gestures can be effectively applied while maintaining the subject's identity.
+        </h2>
         <div class="columns is-centered has-text-centered">
           <div class="column">
             <div class="publication-img">
-              <img id="architecture" src="static/images/fig_animals.jpg" width="700"/>
+              <img id="architecture" src="static/images/fig_human.jpg" width="700"/>
             </div>
           </div>
         </div>
     </div>
   </div>
 </section>
-
-
-<section class="hero body">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column content"><h2 class="title is-3">Human</h2>
-        <div class="hero-body">
-          <img id="fig-human">
-          <img src="./static/images/fig_human.jpg" width="700"
-                    class="fig-human"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
 
 
 <!--
@@ -333,22 +365,7 @@
 </section>-->
 
 
-<section class="hero is-light is-small">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-        <div class="section-title">
-          <h2 class="title is-3 is-centered">Personalization</h2>
-        </div>
-        <div class="columns is-centered has-text-centered">
-          <div class="column">
-            <div class="publication-img">
-              <img id="architecture" src="static/images/fig_guitar.jpg" width="700"/>
-            </div>
-          </div>
-        </div>
-    </div>
-  </div>
-</section>
+
 
 
 <section class="section" id="BibTeX">
